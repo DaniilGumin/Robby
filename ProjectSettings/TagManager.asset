@@ -9,6 +9,9 @@ TagManager:
   - area
   - Portalin
   - PortalOut
+  - Fuel
+  - Ground
+  - debaf
   layers:
   - Default
   - TransparentFX
