@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class historymenu : MonoBehaviour {
+public class historymenu : MonoBehaviour 
+{
 	public GameObject Menu;
 
-	public void Start(){
+	public void Start()
+	{
 		Menu.SetActive(true);
 	}	
 	
-	public void Back(){
+	public void Back()
+	{
 		SceneManager.LoadScene("menu");
 
 	}

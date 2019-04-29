@@ -11,17 +11,20 @@ public class fuel : MonoBehaviour
     bool first = true; 
 
 
-    void Spawn(){ 
-    float x = (float)Random.Range(right,left); 
-    float y = 16.5f;
-    Instantiate(Fuel, new Vector2(x,y),Quaternion.identity); 
+    void Spawn()
+    { 
+        float x = (float)Random.Range(right,left); 
+        float y = 16.5f;
+        Instantiate(Fuel, new Vector2(x,y),Quaternion.identity); 
     } 
     
-    void Start () { 
-    if (first) { 
-        Spawn(); 
-        first = false; 
-    } 
-    InvokeRepeating("Spawn", 3,3);  
+    void Start () 
+    { 
+        if (first) 
+        { 
+            Spawn(); 
+            first = false; 
+        } 
+        InvokeRepeating("Spawn", 3,3);  
     } 
 }

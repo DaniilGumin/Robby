@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour {
+public class Portal : MonoBehaviour 
+{
 
 	public GameObject PortalOut;
 	private AudioSource Audio;
 	
-	public void Start(){
+	public void Start()
+	{
 		Audio = GetComponent<AudioSource> ();
 	}
 
-	void OnTriggerEnter2D (Collider2D other){
+	void OnTriggerEnter2D (Collider2D other)
+	{
 		Audio.Play();
-		if (other.tag == "Player"){
+		if (other.tag == "Player")
+		{
 			other.transform.position = PortalOut.transform.position;
 		}
-	}
-		
+	}	
 }
