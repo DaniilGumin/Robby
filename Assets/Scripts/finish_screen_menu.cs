@@ -4,46 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class finish_screen_menu : MonoBehaviour 
+
+namespace Scripts
 {
-	public GameObject Menu;
-	public GameObject loadingScreen;
-	public Slider slider;
-	public Text text;
-
-
-	IEnumerator LoadAsync(int sceneIndex)
+	public class finish_screen_menu : MonoBehaviour 
 	{
-		AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-		loadingScreen.SetActive (true);
+		public GameObject Menu;
+		public GameObject loadingScreen;
+		public Slider slider;
+		public Text text;
 
-		while (!operation.isDone)
+
+		IEnumerator LoadAsync(int sceneIndex)
 		{
-			float progress = Mathf.Clamp01(operation.progress / 0.9f);
-			slider.value = progress;
-			text.text = (int) progress*100f+"%";
+			AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+			loadingScreen.SetActive (true);
 
-			yield return null;
+			while (!operation.isDone)
+			{
+				float progress = Mathf.Clamp01(operation.progress / 0.9f);
+				slider.value = progress;
+				text.text = (int) progress*100f+"%";
+
+				yield return null;
+			}
 		}
-	}
 
-	public void Start()
-	{
-		Menu.SetActive(true);
-	}	
+		public void Start()
+		{
+			Menu.SetActive(true);
+		}	
 
-	public void LoadLvl()
-	{
-		StartCoroutine (LoadAsync(SceneManager.GetActiveScene().buildIndex+1));
-	}
+		public void LoadLvl()
+		{
+			StartCoroutine (LoadAsync(SceneManager.GetActiveScene().buildIndex+1));
+		}
 
-	public void Main_menu()
-	{
-		SceneManager.LoadScene("menu");
-	}
+		public void Main_menu()
+		{
+			SceneManager.LoadScene("menu");
+		}
 
-	public void Retry( )
-	{
-		StartCoroutine (LoadAsync(SceneManager.GetActiveScene().buildIndex));
+		public void Retry( )
+		{
+			StartCoroutine (LoadAsync(SceneManager.GetActiveScene().buildIndex));
+			Varibales.time = 1f;
+			Varibales.Paused = false;
+			Varibales.Death = false;
+		}
 	}
 }

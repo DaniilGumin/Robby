@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 
-public class enemy : MonoBehaviour 
+namespace Scripts
 {
-
-	public GameObject Respawn;
-
-	void OnTriggerEnter2D (Collider2D other)
+	public class enemy : MonoBehaviour 
 	{
-		if (other.tag == "Player")
+		public GameObject DeathMenu;
+		
+
+		void OnTriggerEnter2D (Collider2D other)
 		{
-			Thread.Sleep(500);
-			other.transform.position = Respawn.transform.position;
+			if (other.tag == "Player")
+			{
+				Thread.Sleep(500);
+				StartPause();
+			}
+		}		
+		public void StartPause()
+		{
+			DeathMenu.SetActive(true);
+			Varibales.time = 0f;
+			Varibales.Paused = true;
+			Varibales.Death = true;
 		}
 	}
-		
 }
-

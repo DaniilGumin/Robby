@@ -7,10 +7,8 @@ namespace Scripts
 {
 	public class pause : MonoBehaviour 
 	{
-		
-		public GameObject PauseButton;
+        public GameObject PauseButton;
 		public GameObject NavigationMenu;
-		public bool Paused = false;
 		public static bool Finished = false;
 		
 
@@ -20,36 +18,48 @@ namespace Scripts
 			{
 				Finish();
 			}
-			else if (Paused)
+			else if (Varibales.Paused && !Varibales.Death)
 			{
 				StartPause();
 			}
-			else if(!Paused)
+			else if (Varibales.Paused && Varibales.Death)
 			{
-				StartResume();
+				DeathPause();
 			}
-			
+			else if(!Varibales.Paused)
+			{
+				Resume();
+			}
+			Time.timeScale = Varibales.time;
 		}
 
 		public void StartPause()
 		{
 			PauseButton.SetActive(false);
 			NavigationMenu.SetActive(true);
-			Paused = true;
-			Time.timeScale = 0f;
+			Varibales.Paused = true;
+			Varibales.time = 0f;
+			
 		}
-		public void StartResume()
+		public void DeathPause()
+		{
+			PauseButton.SetActive(false);
+			Varibales.Paused = true;
+			Varibales.time = 0f;
+			
+		}
+		public void Resume()
 		{
 			PauseButton.SetActive(true);
 			NavigationMenu.SetActive(false);
-			Paused = false;
-			Time.timeScale = 1f;
+			Varibales.Paused = false;
+			Varibales.time = 1f;
 		}
 		public void Finish()
 		{
 			PauseButton.SetActive(false);
-			Paused = true;
-			Time.timeScale = 0f;
+			Varibales.Paused = true;
+			Varibales.time = 0f;
 		}
 		public void StartMenu()
 		{
