@@ -17,6 +17,7 @@ namespace Scripts
         public Text text;
         private float countOfFuel = 0.0f;
         private bool onGround = true;
+       
 
         
         
