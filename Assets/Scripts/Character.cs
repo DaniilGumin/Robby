@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 namespace Scripts
@@ -17,12 +18,26 @@ namespace Scripts
         public Text text;
         private float countOfFuel = 0.0f;
         private bool onGround = true;
+        public GameObject gun;
+        public GameObject LeftButton;
+        public GameObject RightButton;
+        public GameObject JumpButton;
+        public GameObject ShotButton;
+        float PosLeftButton;
+        float PosRightButton;
+        float PosJumpButton;
+        float PosShotButton;
+        float speed;
        
 
         
         
         void Start()
         {   
+            PosLeftButton = LeftButton.transform.position.y;
+            PosRightButton = RightButton.transform.position.y;
+            PosJumpButton = JumpButton.transform.position.y;
+            PosShotButton = ShotButton.transform.position.y;
             Scripts.pause.Finished = false;
             rb = GetComponent<Rigidbody2D>();
         }
@@ -61,36 +76,50 @@ namespace Scripts
                 Scripts.pause.Finished = true;
                 end.SetActive(true);
             }
-            if (Input.GetKeyDown (KeyCode.Space) && onGround)
+            if (PosJumpButton != JumpButton.transform.position.y && onGround)
             {
-                onGround = false;
-                rb.AddForce (Vector2.up * 2000);
-            }
-            if(Application.platform== RuntimePlatform.Android)
+                            onGround = false;
+                            rb.AddForce(Vector2.up*2000);
+            } 
+            if (PosLeftButton != LeftButton.transform.position.y)
             {
-                horizontal = Input.acceleration.x;      
-            }
+                speed = -20f;
+                isFacingRight = false;
+                Flip ();
+            }  
+            else if (PosRightButton != RightButton.transform.position.y)
+            {
+                speed = 20f;
+                isFacingRight = true;
+                Flip ();
+            } 
+            
+            else if (PosShotButton != ShotButton.transform.position.y)
+            {
+                Debug.Log("Shot");
+            }   
             else
             {
-                horizontal = Input.GetAxis("Horizontal");
-            }
-            rb.velocity = new Vector2 (horizontal*25f, rb.velocity.y);
-            if (horizontal > 0 && !isFacingRight)
-                Flip ();
-            else if (horizontal < 0 && isFacingRight)
-                Flip ();
-            // if(Application.platform == RuntimePlatform.Android){
+                speed = 0;
+            }       
 
-            // }
+            rb.velocity = new Vector2 (speed, rb.velocity.y);
+
+            
 
         }
 
         void Flip()
         {
-            isFacingRight = !isFacingRight;
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            if (isFacingRight)
+            {
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+            
         }
     
     }
