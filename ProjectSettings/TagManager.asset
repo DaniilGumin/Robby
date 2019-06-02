@@ -12,6 +12,7 @@ TagManager:
   - Fuel
   - Ground
   - debaf
+  - Explosion
   layers:
   - Default
   - TransparentFX

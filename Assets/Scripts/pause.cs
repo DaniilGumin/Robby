@@ -9,6 +9,7 @@ namespace Scripts
 	{
         public GameObject PauseButton;
 		public GameObject NavigationMenu;
+		public GameObject DeathMenu;
 		public static bool Finished = false;
 		
 
@@ -22,7 +23,7 @@ namespace Scripts
 			{
 				StartPause();
 			}
-			else if (Varibales.Paused && Varibales.Death)
+			else if (!Varibales.Paused && Varibales.Death)
 			{
 				DeathPause();
 			}
@@ -43,10 +44,10 @@ namespace Scripts
 		}
 		public void DeathPause()
 		{
-			PauseButton.SetActive(false);
-			Varibales.Paused = true;
+			DeathMenu.SetActive(true);
 			Varibales.time = 0f;
-			
+			Varibales.Paused = true;
+			Varibales.Death = true;	
 		}
 		public void Resume()
 		{

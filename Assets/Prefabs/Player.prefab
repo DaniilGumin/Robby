@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5218140199724194401}
   - component: {fileID: 5218140199724194400}
   - component: {fileID: 5184347334446532632}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -119,6 +119,11 @@ MonoBehaviour:
   end: {fileID: 0}
   slider: {fileID: 0}
   text: {fileID: 0}
+  gun: {fileID: 0}
+  LeftButton: {fileID: 0}
+  RightButton: {fileID: 0}
+  JumpButton: {fileID: 0}
+  ShotButton: {fileID: 0}
 --- !u!82 &5218140199724194400
 AudioSource:
   m_ObjectHideFlags: 0

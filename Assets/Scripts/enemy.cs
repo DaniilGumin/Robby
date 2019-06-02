@@ -15,15 +15,8 @@ namespace Scripts
 			if (other.tag == "Player")
 			{
 				Thread.Sleep(500);
-				StartPause();
+				Varibales.Death = true;
 			}
 		}		
-		public void StartPause()
-		{
-			DeathMenu.SetActive(true);
-			Varibales.time = 0f;
-			Varibales.Paused = true;
-			Varibales.Death = true;
-		}
 	}
 }
