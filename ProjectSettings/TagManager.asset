@@ -13,6 +13,7 @@ TagManager:
   - Ground
   - debaf
   - Explosion
+  - Gun
   layers:
   - Default
   - TransparentFX

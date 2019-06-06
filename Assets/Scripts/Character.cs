@@ -79,17 +79,17 @@ namespace Scripts
             if (PosJumpButton != JumpButton.transform.position.y && onGround)
             {
                             onGround = false;
-                            rb.AddForce(Vector2.up*2000);
+                            rb.AddForce(Vector2.up*Skills.JumpPower);
             } 
             if (PosLeftButton != LeftButton.transform.position.y)
             {
-                speed = -20f;
+                speed = -Skills.Speed;
                 isFacingRight = false;
                 Flip ();
             }  
             else if (PosRightButton != RightButton.transform.position.y)
             {
-                speed = 20f;
+                speed = Skills.Speed;
                 isFacingRight = true;
                 Flip ();
             } 
