@@ -18,8 +18,12 @@ namespace Scripts
         } 
         void OnCollisionEnter2D(Collision2D other) 
         { 
-            if (other.gameObject.tag != "Ground")
-            {   
+            if (other.gameObject.tag == "Player" && Character.HaveShield)
+			{
+				Character.HaveShield = false;
+			}
+			else if (other.gameObject.tag != "Ground")
+			{
                 Destroy(other.gameObject); 
                 Destroy(gameObject);
                 Thread.Sleep(100);

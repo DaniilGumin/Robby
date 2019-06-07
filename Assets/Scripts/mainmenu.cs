@@ -33,7 +33,7 @@ public class mainmenu : MonoBehaviour
 	}	
 	public void Play(int sceneIndex)
 	{
-		StartCoroutine (LoadAsync(sceneIndex));
+		StartCoroutine (LoadAsync(1));
 	}
 
 	public void Quit()

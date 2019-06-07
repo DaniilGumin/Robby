@@ -42,7 +42,7 @@ namespace Scripts
 
 		public void Main_menu()
 		{
-			SceneManager.LoadScene("menu");
+			SceneManager.LoadScene("SkillsTree");
 		}
 
 		public void Retry( )

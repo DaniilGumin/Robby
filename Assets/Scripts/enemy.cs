@@ -12,7 +12,11 @@ namespace Scripts
 
 		void OnTriggerEnter2D (Collider2D other)
 		{
-			if (other.tag == "Player")
+			if (other.tag == "Player" && Character.HaveShield)
+			{
+				Character.HaveShield = false;
+			}
+			else if (other.tag == "Player")
 			{
 				Thread.Sleep(500);
 				Varibales.Death = true;

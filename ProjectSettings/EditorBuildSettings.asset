@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/finish_screen.unity
     guid: 0837661aac491bb4caaf08276f25dfb1
+  - enabled: 1
+    path: Assets/Scenes/SkillsTree.unity
+    guid: 673ee448af42c604a97b7f147e7fd956
   m_configObjects: {}

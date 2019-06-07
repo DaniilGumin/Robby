@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Threading;
 
 
 namespace Scripts
@@ -18,33 +19,47 @@ namespace Scripts
         public Text text;
         private float countOfFuel = 0.0f;
         private bool onGround = true;
-        public GameObject gun;
+        public GameObject gun;  
+        static public bool HaveShield = false;
+        public GameObject Shield;
+        public GameObject ShieldButton;
         public GameObject LeftButton;
         public GameObject RightButton;
         public GameObject JumpButton;
-        public GameObject ShotButton;
+        public GameObject ShotButton; 
         float PosLeftButton;
         float PosRightButton;
         float PosJumpButton;
         float PosShotButton;
         float speed;
+        float PosShieldButton;
+        bool checkPosShildButton = false;
        
 
-        
+        void CheckBaf()
+        {
+            if (Skills.Shield)
+            {
+               ShieldButton.SetActive(true);
+            }
+        }
         
         void Start()
         {   
+            CheckBaf();
             PosLeftButton = LeftButton.transform.position.y;
             PosRightButton = RightButton.transform.position.y;
             PosJumpButton = JumpButton.transform.position.y;
             PosShotButton = ShotButton.transform.position.y;
+            PosShieldButton =  ShieldButton.transform.position.y;
             Scripts.pause.Finished = false;
             rb = GetComponent<Rigidbody2D>();
         }
 
         void OnCollisionEnter2D(Collision2D other) 
         { 
-            if (other.gameObject.tag == "Fuel") {   
+            if (other.gameObject.tag == "Fuel") 
+            {   
                 if(countOfFuel<=0.95)
                 {
                     countOfFuel += 0.05f;
@@ -68,7 +83,7 @@ namespace Scripts
 
 
         void FixedUpdate()
-        {
+        {   
             slider.value = countOfFuel;
             text.text = (countOfFuel*100).ToString("F" + 0) + "%";
             if (countOfFuel >= 1.0f)
@@ -76,10 +91,21 @@ namespace Scripts
                 Scripts.pause.Finished = true;
                 end.SetActive(true);
             }
-            if (PosJumpButton != JumpButton.transform.position.y && onGround)
+            if (Skills.Shield && PosShieldButton != ShieldButton.transform.position.y && !checkPosShildButton)
             {
-                            onGround = false;
-                            rb.AddForce(Vector2.up*Skills.JumpPower);
+                checkPosShildButton = true;
+                HaveShield = true;
+                ShieldButton.SetActive(false);
+                Shield.SetActive(true);
+            }
+            if (!HaveShield)
+            {
+                Shield.SetActive(false);
+            }
+            if (PosJumpButton != JumpButton.transform.position.y && onGround)          
+            {
+                onGround = false;
+                rb.AddForce(Vector2.up*Skills.JumpPower);
             } 
             if (PosLeftButton != LeftButton.transform.position.y)
             {

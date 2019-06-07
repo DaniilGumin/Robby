@@ -10,6 +10,7 @@ namespace Scripts
         public static float JumpPower = 2000f;
         static sbyte SpeedLvl = 0;
         public static float Speed = 20f;
+        public static bool Shield = false;
 
         public void upJumpPowerLvl()
         {
@@ -34,6 +35,10 @@ namespace Scripts
             {
                 Debug.Log("U can't do this");
             }
+        }
+        public void addShield()
+        {
+            Shield = true;
         }
     }
 }
