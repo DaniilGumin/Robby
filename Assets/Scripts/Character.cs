@@ -19,7 +19,8 @@ namespace Scripts
         public Text text;
         private float countOfFuel = 0.0f;
         private bool onGround = true;
-        public GameObject gun;  
+        public GameObject WithOutGun;
+        public GameObject WithGun;  
         static public bool HaveShield = false;
         public GameObject Shield;
         public GameObject ShieldButton;
@@ -34,6 +35,7 @@ namespace Scripts
         float speed;
         float PosShieldButton;
         bool checkPosShildButton = false;
+        public GameObject Bullet;
        
 
         void CheckBaf()
@@ -79,6 +81,12 @@ namespace Scripts
                 countOfFuel -= countOfFuel*0.1f;
                 Destroy(other.gameObject); 
             }
+            if (other.gameObject.tag == "Gun") 
+            {
+                WithGun.SetActive(true);
+                WithOutGun.SetActive(false);
+                Destroy(other.gameObject);
+            }
         }
 
 
@@ -122,7 +130,7 @@ namespace Scripts
             
             else if (PosShotButton != ShotButton.transform.position.y)
             {
-                Debug.Log("Shot");
+                Instantiate(Bullet,new Vector2(transform.position.x+2f,transform.position.y-0.2f),Quaternion.identity);
             }   
             else
             {
