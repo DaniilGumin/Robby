@@ -12,7 +12,7 @@ namespace Scripts
     public class Character: MonoBehaviour
     {
         Rigidbody2D rb;
-        bool isFacingRight = true;
+        public static bool isFacingRight = true;
         float horizontal;
         public GameObject end;
         public Slider slider;
@@ -36,6 +36,7 @@ namespace Scripts
         float PosShieldButton;
         bool checkPosShildButton = false;
         public GameObject Bullet;
+        float shottime = 0;
        
 
         void CheckBaf()
@@ -92,6 +93,7 @@ namespace Scripts
 
         void FixedUpdate()
         {   
+            shottime += Time.deltaTime;
             slider.value = countOfFuel;
             text.text = (countOfFuel*100).ToString("F" + 0) + "%";
             if (countOfFuel >= 1.0f)
@@ -126,12 +128,18 @@ namespace Scripts
                 speed = Skills.Speed;
                 isFacingRight = true;
                 Flip ();
+            }        
+            else if (PosShotButton != ShotButton.transform.position.y && shottime > 0.5f && isFacingRight)
+            {   
+                Scripts.Bullet.speed = 40f;
+                Instantiate(Bullet,new Vector2(transform.position.x + 2f,transform.position.y - 0.2f),Quaternion.identity);
+                shottime = 0;
             } 
-            
-            else if (PosShotButton != ShotButton.transform.position.y)
-            {
-                Instantiate(Bullet,new Vector2(transform.position.x+2f,transform.position.y-0.2f),Quaternion.identity);
-            }   
+            else if(PosShotButton != ShotButton.transform.position.y && shottime > 0.5f && !isFacingRight)
+            {   Scripts.Bullet.speed = -40f; 
+                Instantiate(Bullet,new Vector2(transform.position.x - 2f,transform.position.y - 0.2f),Quaternion.identity);                  
+                shottime = 0;
+            }
             else
             {
                 speed = 0;
@@ -152,8 +160,7 @@ namespace Scripts
             else
             {
                 transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            
+            }     
         }
     
     }
