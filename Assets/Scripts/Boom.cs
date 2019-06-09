@@ -22,12 +22,17 @@ namespace Scripts
 			{
 				Character.HaveShield = false;
 			}
-			else if (other.gameObject.tag != "Ground")
+			else if (other.gameObject.tag != "Ground" && other.gameObject.tag == "Player")
 			{
                 Destroy(other.gameObject); 
                 Destroy(gameObject);
                 Thread.Sleep(100);
                 Varibales.Death = true;
+            }
+            else
+            {
+                Destroy(other.gameObject); 
+                Destroy(gameObject);
             }
         }
     }
