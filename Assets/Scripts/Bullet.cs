@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour
         void Update()
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
+            if (transform.position.x>72f | transform.position.x<-25f)
+            {
+                Destroy(gameObject);
+            }
         }
         void OnCollisionEnter2D(Collision2D other) 
             { 

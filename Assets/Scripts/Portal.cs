@@ -16,9 +16,6 @@ public class Portal : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		Audio.Play();
-		if (other.tag == "Player")
-		{
-			other.transform.position = PortalOut.transform.position;
-		}
+		other.transform.position = PortalOut.transform.position;
 	}	
 }

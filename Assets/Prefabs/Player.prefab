@@ -434,6 +434,7 @@ MonoBehaviour:
   RightButton: {fileID: 0}
   JumpButton: {fileID: 0}
   ShotButton: {fileID: 0}
+  Bullet: {fileID: 0}
 --- !u!82 &5218140199724194400
 AudioSource:
   m_ObjectHideFlags: 0
@@ -945,6 +946,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800668803972496946, guid: 302da85b62e1552478be887578028ba5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7811496619234765021, guid: 302da85b62e1552478be887578028ba5,
         type: 3}
