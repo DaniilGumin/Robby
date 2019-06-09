@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace Scripts
 {
-public class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour
     {   
         Rigidbody2D rb;
         public static float speed = 40f;
+        public GameObject explosion;
+
+        
 
         void Start()
             {
@@ -24,12 +27,25 @@ public class Bullet : MonoBehaviour
             }
         }
         void OnCollisionEnter2D(Collision2D other) 
-            { 
-                if (other.gameObject.tag != "Player" && other.gameObject.tag != "Ground")
-                {
-                    Destroy(other.gameObject); 
-                    Destroy(gameObject);
-                }
+        {   
+            if (other.gameObject.tag == "Bomb" | other.gameObject.tag == "Fuel")
+            {
+                Destroy(other.gameObject); 
+                Destroy(gameObject);
+                SpawnExplosion(); 
             }
+            else if (other.gameObject.tag != "Player" && other.gameObject.tag != "Ground" && other.gameObject.tag != "Explosion")
+            {
+                Destroy(other.gameObject); 
+                Destroy(gameObject);
+            }
+        
+        }
+        void SpawnExplosion()
+        { 
+            float x = gameObject.transform.position.x;
+            float y = gameObject.transform.position.y;
+            Instantiate(explosion, new Vector2(x,y),Quaternion.identity); 
+        } 
     }
 }
