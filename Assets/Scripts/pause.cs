@@ -59,7 +59,6 @@ namespace Scripts
 		public void Finish()
 		{
 			PauseButton.SetActive(false);
-			Varibales.Paused = true;
 			Varibales.time = 0f;
 		}
 		public void StartMenu()

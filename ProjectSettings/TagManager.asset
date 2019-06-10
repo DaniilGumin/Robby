@@ -14,6 +14,8 @@ TagManager:
   - debaf
   - Explosion
   - Gun
+  - Bullet
+  - Bomb
   layers:
   - Default
   - TransparentFX

@@ -69,7 +69,7 @@ namespace Scripts
                 }
                 else
                 {
-                    countOfFuel=1.0f;
+                    countOfFuel = 1.0f;
                 }
                 Destroy(other.gameObject); 
             }
