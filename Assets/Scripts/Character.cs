@@ -21,6 +21,7 @@ namespace Scripts
         private bool onGround = true;
         public GameObject WithOutGun;
         public GameObject WithGun;  
+        private bool CanShot = false;
         static public bool HaveShield = false;
         public GameObject Shield;
         public GameObject ShieldButton;
@@ -87,6 +88,7 @@ namespace Scripts
                 WithGun.SetActive(true);
                 WithOutGun.SetActive(false);
                 Destroy(other.gameObject);
+                CanShot = true;
             }
         }
 
@@ -129,13 +131,13 @@ namespace Scripts
                 isFacingRight = true;
                 Flip ();
             }        
-            else if (PosShotButton != ShotButton.transform.position.y && shottime > 0.5f && isFacingRight)
+            else if (PosShotButton != ShotButton.transform.position.y && shottime > 0.5f && isFacingRight && CanShot)
             {   
                 Scripts.Bullet.speed = 40f;
                 Instantiate(Bullet,new Vector2(transform.position.x + 2f,transform.position.y - 0.2f),Quaternion.identity);
                 shottime = 0;
             } 
-            else if(PosShotButton != ShotButton.transform.position.y && shottime > 0.5f && !isFacingRight)
+            else if(PosShotButton != ShotButton.transform.position.y && shottime > 0.5f && !isFacingRight && CanShot)
             {   Scripts.Bullet.speed = -40f; 
                 Instantiate(Bullet,new Vector2(transform.position.x - 2f,transform.position.y - 0.2f),Quaternion.identity);                  
                 shottime = 0;
