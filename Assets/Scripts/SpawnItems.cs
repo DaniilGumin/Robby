@@ -8,6 +8,7 @@ public class SpawnItems : MonoBehaviour
     public GameObject bottelOfWater; 
     public GameObject Bomb; 
     public GameObject Gun;
+    public GameObject Enemy;
     private int left = -25; 
     private int right = 72; 
 
@@ -36,13 +37,20 @@ public class SpawnItems : MonoBehaviour
         float y = 16.5f;
         Instantiate(Gun, new Vector2(x,y),Quaternion.identity); 
     }
+    void SpawnEnemy()
+    {
+        float x = 96f;
+        float y = 9.4f;
+        Instantiate(Enemy, new Vector2(x,y),Quaternion.identity);
+    }
 
     
     void Start () 
     {   
-        // InvokeRepeating("SpawnGun", 0,3);
+        InvokeRepeating("SpawnEnemy", 10,7);
         InvokeRepeating("SpawnFuel", 0,3);
         InvokeRepeating("SpawnWater", 10,10);  
         InvokeRepeating("SpawnBomb", 20,20); 
+        InvokeRepeating("SpawnGun", 30,30);
     } 
 }
