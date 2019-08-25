@@ -19,8 +19,10 @@ namespace Scripts
         public Text text;
         private float countOfFuel = 0.0f;
         private bool onGround = true;
+        private bool onPlatform = false;
         public GameObject WithOutGun;
         public GameObject WithGun;  
+        private bool canJump = true;
         private bool CanShot = false;
         static public bool HaveShield = false;
         public GameObject Shield;
@@ -39,6 +41,13 @@ namespace Scripts
         public GameObject Bullet;
         float shottime = 0;
        
+
+       private IEnumerator Jump_WaitForSeconds(float value)
+        {
+            canJump = false;
+            yield return new WaitForSeconds(value);
+            canJump = true;
+        }
 
         void CheckBaf()
         {
@@ -90,6 +99,10 @@ namespace Scripts
                 Destroy(other.gameObject);
                 CanShot = true;
             }
+            if (other.gameObject.tag == "Platform")
+            {   
+                onPlatform= true;  
+            }
         }
 
 
@@ -114,11 +127,20 @@ namespace Scripts
             {
                 Shield.SetActive(false);
             }
-            if (PosJumpButton != JumpButton.transform.position.y && onGround)          
-            {
+            if (PosJumpButton != JumpButton.transform.position.y && onGround && canJump)          
+            {   
                 onGround = false;
                 rb.AddForce(Vector2.up*Skills.JumpPower);
+                StartCoroutine(Jump_WaitForSeconds(1f));
+
             } 
+            else if (PosJumpButton != JumpButton.transform.position.y && onPlatform && canJump)          
+            {   
+                onPlatform = false;
+                rb.AddForce(Vector2.up*Skills.JumpPower);
+                StartCoroutine(Jump_WaitForSeconds(1f));
+
+            }
             if (PosLeftButton != LeftButton.transform.position.y)
             {
                 speed = -Skills.Speed;
@@ -146,9 +168,10 @@ namespace Scripts
             {
                 speed = 0;
             }       
-
+            
             rb.velocity = new Vector2 (speed, rb.velocity.y);
 
+            
             
 
         }
